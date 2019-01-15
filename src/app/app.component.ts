@@ -1,10 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SurveyService } from './survey.service';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'proxibanquev4-Angular';
+export class AppComponent implements OnInit {
+
+
+  isActive: boolean;
+
+
+  constructor(private service: SurveyService) {
+
+  }
+
+  ngOnInit() {
+    this.service.checkSurvey().subscribe((survey) => {
+      if (survey) {
+        this.isActive = true;
+      } else {
+        this.isActive = false;
+      }
+    });
+  }
+
+
+
+
 }
