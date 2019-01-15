@@ -23,7 +23,11 @@
         <label for="clientNumber">Numéro Client (8 chiffres) :</label>
         <input [(ngModel)]="customer.clientNumber" required id="clientNumber" name="clientNumber" class="form-control">
       </div>
-      <button class="btn btn-primary">Valider</button>
+      <div *ngIf="isOK">
+      <h4>Vous serez contacté(e) dans un délai de {{calculJours}} jours
+        par un de nos conseillers expert en assurance auto</h4> 
+    </div>
+      <button (click)="onNumberValidated()" class="btn btn-primary">Valider</button>
     </form>
   </div>
   <ng-container *ngSwitchCase="3">

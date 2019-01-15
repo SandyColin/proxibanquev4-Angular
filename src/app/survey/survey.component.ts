@@ -17,6 +17,8 @@ export class SurveyComponent implements OnInit {
   public survey: Survey;
   public opinion: Opinion;
   public customer: Customer;
+  public isOK: Boolean;
+  public calculJours: Number;
 
   constructor(private service: SurveyService) {
     this.number = 1;
@@ -44,6 +46,7 @@ export class SurveyComponent implements OnInit {
       this.service.create(this.opinion).subscribe(() => {
         console.log('Avis positif, créé avec succès sur BDD !');
       });
+      this.getDays();
     });
 
     myForm.resetForm(new Opinion(null, null));
@@ -56,5 +59,21 @@ export class SurveyComponent implements OnInit {
   onAddPositive() {
     this.number = 2;
     this.opinion.isPositive = true;
+  }
+
+  onNumberValidated() {
+    this.isOK = true;
+  }
+  getDays(): Number {
+    console.log(this.survey);
+    const date = new Date (this.survey.provisionalDate[0], this.survey.provisionalDate[1], this.survey.provisionalDate[2]);
+    console.log(date.getTime());
+    const reste = date.getTime() - Date.now();
+    const calculJours = Math.ceil(reste / (1000 * 60 * 60 * 24));
+    const calculDateNow = Math.ceil(Date.now() / (1000 * 60 * 60 * 24));
+    console.log(calculDateNow);
+    console.log(calculJours);
+    return calculJours;
+
   }
 }
