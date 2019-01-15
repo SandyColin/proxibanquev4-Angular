@@ -1,8 +1,11 @@
 .container {
     display:flex;
-    justify-content: space-between;
+    justify-content: space-around;
    
     padding:150px;
+}
+img{
+    padding:50px;
 }
 
 h1 {

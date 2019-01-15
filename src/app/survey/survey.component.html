@@ -1,19 +1,14 @@
-<<<<<<< HEAD
-<div [ngSwitch]="number">
-  <div class="container" *ngSwitchCase="1">
-    <h1>Voudriez-vous adhérer à un service d'assurance auto Proxibanque ?</h1>
-=======
 <div class="body" >
 <h2>Sondage n°{{survey?.id}}</h2>
-<h2>Début du sondage : {{survey?.beginningDate}}</h2>
-<h2>Fin prévisionnelle : {{survey?.provisionnalDate}}</h2>
+<h2>Début du sondage : {{survey?.startingDate}}</h2>
+<h2>Fin prévisionnelle : {{survey?.provisionalDate}}</h2>
 
-<div [ngSwitch]="isPositive">
+<div [ngSwitch]="number">
 
   <h1>Voudriez-vous adhérer à un service d'assurance auto Proxibanque ?</h1>
-  <div class="container" *ngSwitchCase="">
+  <div class="container" *ngSwitchCase="1">
 
->>>>>>> e55c5d36c58981fadb0d5f74d7bdcdcab229cc16
+
     <img class="list-icon" src="./assets/thumbup.png" (click)="onAddPositive()">
 
     <div>

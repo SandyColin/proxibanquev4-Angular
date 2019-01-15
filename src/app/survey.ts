@@ -1,12 +1,12 @@
 export class Survey {
     id: number;
-    beginningDate: Date;
-    provisionnalDate: Date;
+    startingDate: Date;
+    provisionalDate: Date;
     endDate: Date;
 
-    constructor(beginningDate: Date, provisionnalDate: Date, id?: number, endDate?: Date) {
-        this.beginningDate = beginningDate;
-        this.provisionnalDate = provisionnalDate;
+    constructor(startingDate: Date, provisionalDate: Date, id?: number, endDate?: Date) {
+        this.startingDate = startingDate;
+        this.provisionalDate = provisionalDate;
         this.id = id;
         this.endDate = endDate;
     }

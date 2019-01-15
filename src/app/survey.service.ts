@@ -5,6 +5,7 @@ import { Survey } from './survey';
 import { HttpClient } from '@angular/common/http';
 import { environment as ENV } from './../environments/environment';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -28,11 +29,17 @@ export class SurveyService {
 
 
   public checkSurvey(): Observable<Survey> {
-    return this.httpClient.get<Survey>(this.wsUrlSurvey);
+    return this.httpClient.get<Survey>(this.wsUrlSurvey).pipe(
+      // Tap est un opérateur qui permet d'écouter les données
+      // qui passent dans l'Observable et les utiliser.
+      // La fonction ci-dessous écoute l'article récupéré et le stock
+      // en attribut du service pour mémorisation.
+      tap((survey) => this.survey = survey)
+    );
   }
 
-  public checkClient(): Observable<Customer> {
-    return this.httpClient.get<Customer>(this.wsUrlCustomer);
+  public checkClient(clientNumber: string): Observable<Customer> {
+    return this.httpClient.get<Customer>(this.wsUrlCustomer + `/${clientNumber}`);
   }
 
   public getSurvey(): Survey {
@@ -41,37 +48,6 @@ export class SurveyService {
   public create(opinion: Opinion): Observable<Opinion> {
     const newOpinion = new Opinion(opinion.isPositive, opinion.survey, opinion.comment, opinion.customer);
     // tslint:disable-next-line:max-line-length
-   return this.httpClient.post<Opinion>(this.wsUrlOpinion, newOpinion);
+    return this.httpClient.post<Opinion>(this.wsUrlOpinion, newOpinion);
   }
-
-  // public getAll(): Array<Survey> {
-  //   this.httpClient.get(this.wsUrl).subscribe((list: Array<Survey>) => this.surveys.push(...list));
-  //   return this.surveys;
-  // }
-
-
-
-  // public read(id: number): Survey {
-  //   const index = this.getIndex(id);
-  //   if (index >= 0) {
-  //     return this.surveys[index];
-  //   }
-  // }
-
-  // public update(survey: Survey) {
-  //   const editSurvey = new Survey(survey.beginningDate, survey.provisionnalDate);
-  //   this.httpClient.put<Survey>(this.wsUrl + `/${survey.id}`, editSurvey).subscribe((surveyFromJEE) => {
-  //     const index = this.getIndex(survey.id);
-  //     if (index >= 0) {
-  //       // tslint:disable-next-line:max-line-length
-  //       this.surveys.splice(index, 1, new Survey(surveyFromJEE.beginningDate, surveyFromJEE.provisionnalDate, surveyFromJEE.id, surveyFromJEE.endDate));
-  //     }
-  //   });
-  // }
-
-  // private getIndex(id: number): number {
-  //   return this.surveys.findIndex(
-  //     (survey) => survey.id === id
-  //   );
-  // }
 }

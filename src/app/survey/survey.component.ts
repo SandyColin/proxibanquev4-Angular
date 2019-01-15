@@ -17,13 +17,16 @@ export class SurveyComponent implements OnInit {
   public survey: Survey;
   public opinion: Opinion;
   public customer: Customer;
+
   constructor(private service: SurveyService) {
     this.number = 1;
     this.opinion = new Opinion(null, null);
+    this.customer = new Customer(undefined);
   }
 
   ngOnInit() {
     this.survey = this.service.getSurvey();
+
   }
 
   validateNeg(myForm: NgForm) {
@@ -36,9 +39,13 @@ export class SurveyComponent implements OnInit {
 
   validatePos(myForm: NgForm) {
     this.opinion.survey = this.survey;
-    this.service.create(this.opinion).subscribe(() => {
-      console.log('Avis positif, créé avec succès sur BDD !')
+    this.service.checkClient(this.customer.clientNumber).subscribe((customer) => {
+      this.opinion.customer = customer;
+      this.service.create(this.opinion).subscribe(() => {
+        console.log('Avis positif, créé avec succès sur BDD !');
+      });
     });
+
     myForm.resetForm(new Opinion(null, null));
   }
   onAddNegative() {
