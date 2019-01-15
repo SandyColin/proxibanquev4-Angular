@@ -1,21 +1,30 @@
-div {
+.body {
+   background: url("/assets/voiture.jpg") center fixed;
+   background-size: cover;
+   width:2000px;
+   height: 2000px;
+  
+}
+h2, h1{
+   
     text-align : center;
  }
- 
+ h1 {
+   padding-top:350px;
+ }
  #tel {
-    position:absolute;
- 
-    bottom:130px;
-    right:30px;
- }
- 
- #mail {
-    position:absolute;
- 
-    bottom:30px;
-    right:30px;
- }
- 
+   position:absolute;
+
+   bottom:90px;
+   
+}
+
+#mail {
+   position:absolute;
+   bottom:30px;
+   
+}
  button{
-    margin: 10px;
+   margin-left:1700px;
  }
+

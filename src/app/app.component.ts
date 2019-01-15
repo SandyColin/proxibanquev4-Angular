@@ -16,7 +16,9 @@ export class AppComponent implements OnInit {
   constructor(private service: SurveyService) {
 
   }
-
+  // Méthode qui est appelée au moment de la connexion à Angular
+  // Elle permet d'aller vérifier directement si un sondage est en cours ou non
+  // Pour savoir quelle template afficher grâce à une requête asynchrone
   ngOnInit() {
     this.service.checkSurvey().subscribe((survey) => {
 
@@ -26,6 +28,7 @@ export class AppComponent implements OnInit {
         this.isActive = false;
       }
     });
+
   }
 
 

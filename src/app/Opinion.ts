@@ -1,6 +1,6 @@
 import { Survey } from './survey';
 import { Customer } from './customer';
-
+// Classe Opinion représentant les attributs d'un avis
 export class Opinion {
     survey: Survey;
     isPositive: Boolean;

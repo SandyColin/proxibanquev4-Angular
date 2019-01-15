@@ -1,3 +1,4 @@
+// Classe Survey représentant les attributs d'un sondage
 export class Survey {
     id: number;
     startingDate: Date;

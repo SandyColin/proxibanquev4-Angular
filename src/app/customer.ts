@@ -1,3 +1,4 @@
+// Classe Customer représentant les attributs d'un client
 export class Customer {
     id: number;
     firstname: string;
