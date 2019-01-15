@@ -1,0 +1,22 @@
+.container {
+    display:flex;
+    justify-content: space-between;
+   
+    padding:150px;
+}
+
+h1 {
+    margin-top:150px;
+    text-align:center;
+}
+
+h2{
+    text-align:center; 
+}
+
+.body {
+     background: url("/assets/voiture2.jpg") center fixed;
+     background-size: cover;
+     width:100%;
+    /*background-color: red;*/
+}
