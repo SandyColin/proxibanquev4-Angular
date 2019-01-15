@@ -12,31 +12,42 @@ import { Customer } from '../customer';
 })
 export class SurveyComponent implements OnInit {
 
-  customer: Customer;
+  public number: Number;
   public isPositive: Boolean;
   public survey: Survey;
   public opinion: Opinion;
-  constructor(private service: SurveyService) { }
+  public customer: Customer;
+  constructor(private service: SurveyService) {
+    this.number = 1;
+    this.opinion = new Opinion(null, null);
+  }
 
   ngOnInit() {
     this.survey = this.service.getSurvey();
   }
 
   validateNeg(myForm: NgForm) {
-
-    this.service.create(this.opinion);
+    this.opinion.survey = this.survey;
+    this.service.create(this.opinion).subscribe(() => {
+      console.log('Avis négatif, crée avec succès dans BDD !');
+    });
     myForm.resetForm(new Opinion(null, null));
   }
 
   validatePos(myForm: NgForm) {
-    this.service.create(this.opinion);
+    this.opinion.survey = this.survey;
+    this.service.create(this.opinion).subscribe(() => {
+      console.log('Avis positif, créé avec succès sur BDD !')
+    });
     myForm.resetForm(new Opinion(null, null));
   }
   onAddNegative() {
-    this.isPositive = false;
+    this.number = 3;
+    this.opinion.isPositive = false;
   }
 
   onAddPositive() {
-    this.isPositive = true;
+    this.number = 2;
+    this.opinion.isPositive = true;
   }
 }

@@ -18,14 +18,14 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.service.checkSurvey().subscribe((survey) => {
-      this.isActive = true;
-    //   if (survey) {
-    //     this.isActive = true;
-    //   } else {
-    //     this.isActive = false;
-    //   }
-    // });
+    this.service.checkSurvey().subscribe((survey) => {
+
+      if (survey) {
+        this.isActive = true;
+      } else {
+        this.isActive = false;
+      }
+    });
   }
 
 

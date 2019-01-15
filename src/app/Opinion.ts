@@ -1,15 +1,18 @@
+import { Survey } from './survey';
+import { Customer } from './customer';
+
 export class Opinion {
-    id: number;
+    survey: Survey;
     isPositive: Boolean;
     comment: string;
-    clientNumber: number;
+    customer: Customer;
 
 
-    constructor(isPositive: Boolean, comment?: string, clientNumber?: number, id?: number) {
+    constructor(isPositive: Boolean, survey: Survey, comment?: string, customer?: Customer) {
         this.isPositive = isPositive;
         this.comment = comment;
-        this.id = id;
-        this.clientNumber = clientNumber;
+        this.survey = survey;
+        this.customer = customer;
 
     }
 }

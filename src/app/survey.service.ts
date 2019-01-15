@@ -14,14 +14,12 @@ export class SurveyService {
   wsUrlSurvey: string;
   wsUrlCustomer: string;
   wsUrlOpinion: string;
-  opinions: Array<Opinion>;
 
 
   // private survey: Survey;
   // private surveys: Array<Survey>;
 
   constructor(private httpClient: HttpClient) {
-    this.opinions = new Array();
     this.wsUrlSurvey = ENV.apiUrl + '/survey';
     this.wsUrlCustomer = ENV.apiUrl + '/customer';
     this.wsUrlOpinion = ENV.apiUrl + '/opinion';
@@ -40,11 +38,10 @@ export class SurveyService {
   public getSurvey(): Survey {
     return this.survey;
   }
-  public create(opinion: Opinion) {
-    const newOpinion = new Opinion(opinion.isPositive);
+  public create(opinion: Opinion): Observable<Opinion> {
+    const newOpinion = new Opinion(opinion.isPositive, opinion.survey, opinion.comment, opinion.customer);
     // tslint:disable-next-line:max-line-length
-    this.httpClient.post<Opinion>(this.wsUrlOpinion, newOpinion).subscribe((opinionfromJEE) =>
-      this.opinions.push(new Opinion(opinionfromJEE.isPositive, opinionfromJEE.comment, opinionfromJEE.clientNumber)));
+   return this.httpClient.post<Opinion>(this.wsUrlOpinion, newOpinion);
   }
 
   // public getAll(): Array<Survey> {
