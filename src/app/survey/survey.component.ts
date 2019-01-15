@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { SurveyService } from '../survey.service';
 import { Opinion } from '../Opinion';
 import { Survey } from '../survey';
+import { Customer } from '../customer';
 
 @Component({
   selector: 'app-survey',
@@ -11,28 +12,31 @@ import { Survey } from '../survey';
 })
 export class SurveyComponent implements OnInit {
 
-  private survey: Survey;
-  private opinion: Opinion;
+  customer: Customer;
+  public isPositive: Boolean;
+  public survey: Survey;
+  public opinion: Opinion;
   constructor(private service: SurveyService) { }
 
   ngOnInit() {
+    this.survey = this.service.getSurvey();
   }
 
   validateNeg(myForm: NgForm) {
 
     this.service.create(this.opinion);
-
-    myForm.resetForm(new Survey('', ''));
+    myForm.resetForm(new Opinion(null, null));
   }
 
   validatePos(myForm: NgForm) {
-
+    this.service.create(this.opinion);
+    myForm.resetForm(new Opinion(null, null));
   }
   onAddNegative() {
-
+    this.isPositive = false;
   }
 
   onAddPositive() {
-
+    this.isPositive = true;
   }
 }

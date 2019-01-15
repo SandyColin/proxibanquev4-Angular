@@ -10,5 +10,5 @@ export class Customer {
     constructor(clientNumber: string, id?: number) {
         this.clientNumber = clientNumber;
         this.id = id;
-
     }
+}

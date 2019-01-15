@@ -1,25 +1,27 @@
-<h1>Voudriez-vous adhérer à un service d'assurance auto Proxibanque ?</h1>
-  <div class="container">
+<div [ngSwitch]="isPositive">
+  <div class="container" *ngSwitchCase="">
+    <h1>Voudriez-vous adhérer à un service d'assurance auto Proxibanque ?</h1>
     <img class="list-icon" src="./assets/thumbup.png" (click)="onAddPositive()">
     <img class="list-icon" src="./assets/thumbdown.png" (click)="onAddNegative()">
-
-
-    <div *ngIf="isPositive; else elseComTpl">
-      <form (ngSubmit)="validatePos(clientForm)" #clientForm="ngForm">
-        <div class="form-group">
-          <label for="clientNumber">Numéro Client (8 chiffres) :</label>
-          <input [(ngModel)]="customer.clientNumber" required id="clientNumber" name="clientNumber" class="form-control">
-        </div>
-        <button class="btn btn-primary">Valider</button>
-      </form>
-    </div>
-    <ng-template #elseComTpl>
-      <form (ngSubmit)="validateNeg(commentForm)" #commentForm="ngForm">
-        <div class="form-group">
-          <label for="id">Identifiant :</label>
-          <input [(ngModel)]="opinion.comment" required id="id" name="id" class="form-control">
-        </div>
-        <button class="btn btn-primary">Valider</button>
-      </form>
-    </ng-template>
   </div>
+
+
+  <div *ngSwitchCase="true">
+    <form (ngSubmit)="validatePos(clientForm)" #clientForm="ngForm">
+      <div class="form-group">
+        <label for="clientNumber">Numéro Client (8 chiffres) :</label>
+        <input [(ngModel)]="customer.clientNumber" required id="clientNumber" name="clientNumber" class="form-control">
+      </div>
+      <button class="btn btn-primary">Valider</button>
+    </form>
+  </div>
+  <ng-container *ngSwitchCase="false">
+    <form (ngSubmit)="validateNeg(commentForm)" #commentForm="ngForm">
+      <div class="form-group">
+        <label for="id">Commentaire :</label>
+        <input [(ngModel)]="opinion.comment" required id="id" name="id" class="form-control">
+      </div>
+      <button class="btn btn-primary">Valider</button>
+    </form>
+  </ng-container>
+</div>

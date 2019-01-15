@@ -10,3 +10,4 @@ export class Survey {
         this.id = id;
         this.endDate = endDate;
     }
+}

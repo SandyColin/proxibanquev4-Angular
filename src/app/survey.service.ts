@@ -10,13 +10,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SurveyService {
-  // private survey: Survey;
-  // private surveys: Array<Survey>;
+  survey: Survey;
   wsUrlSurvey: string;
   wsUrlCustomer: string;
   wsUrlOpinion: string;
   opinions: Array<Opinion>;
 
+
+  // private survey: Survey;
+  // private surveys: Array<Survey>;
 
   constructor(private httpClient: HttpClient) {
     this.opinions = new Array();
@@ -24,6 +26,8 @@ export class SurveyService {
     this.wsUrlCustomer = ENV.apiUrl + '/customer';
     this.wsUrlOpinion = ENV.apiUrl + '/opinion';
   }
+
+
 
   public checkSurvey(): Observable<Survey> {
     return this.httpClient.get<Survey>(this.wsUrlSurvey);
@@ -33,19 +37,14 @@ export class SurveyService {
     return this.httpClient.get<Customer>(this.wsUrlCustomer);
   }
 
-  public getCustomer(): Customer {
-    this.httpClient.get(this.wsUrlCustomer).subscribe((customer) => {
-      if (customer.id) {
-
-      }
-
-    });
-    return customer;
+  public getSurvey(): Survey {
+    return this.survey;
   }
   public create(opinion: Opinion) {
     const newOpinion = new Opinion(opinion.isPositive);
     // tslint:disable-next-line:max-line-length
-    this.httpClient.post<Opinion>(this.wsUrlOpinion, newOpinion).subscribe((opinionfromJEE) => this.opinions.push(new Opinion(opinionfromJEE.isPositive)));
+    this.httpClient.post<Opinion>(this.wsUrlOpinion, newOpinion).subscribe((opinionfromJEE) =>
+      this.opinions.push(new Opinion(opinionfromJEE.isPositive, opinionfromJEE.comment, opinionfromJEE.clientNumber)));
   }
 
   // public getAll(): Array<Survey> {
@@ -53,7 +52,7 @@ export class SurveyService {
   //   return this.surveys;
   // }
 
- 
+
 
   // public read(id: number): Survey {
   //   const index = this.getIndex(id);
