@@ -43,14 +43,21 @@ export class SurveyComponent implements OnInit {
   }
   // Méthode permettant de valider le formulaire lors d'un avis positif et de créer un objet Opinion (avec facultativement un numéroClient)
   validatePos(myForm: NgForm) {
-    this.opinion.survey = this.survey;
-    this.service.checkClient(this.customer.clientNumber).subscribe((customer) => {
-      this.opinion.customer = customer;
-      this.service.create(this.opinion).subscribe(() => {
-        console.log('Avis positif, créé avec succès sur BDD !');
-      });
-    });
+    if (this.customer.clientNumber === null) {
 
+    } else {
+      this.opinion.survey = this.survey;
+      this.service.checkClient(this.customer.clientNumber).subscribe((customer) => {
+        if (customer !== null) {
+          this.opinion.customer = customer;
+          this.service.create(this.opinion).subscribe(() => {
+            console.log('Avis positif, créé avec succès sur BDD !');
+          });
+        } else {
+          this.number2 = 3;
+        }
+      });
+    }
     myForm.resetForm(new Opinion(null, null));
   }
   // Methode permettant d'afficher la template pour un avis négatif
@@ -71,16 +78,18 @@ export class SurveyComponent implements OnInit {
   // Methode permettant de calculer la difference de jour entre la date du jour et la date previsisonnelle de fin de sondage
   getDays() {
     const date = new Date(this.survey.provisionalDate[0], this.survey.provisionalDate[1] - 1, this.survey.provisionalDate[2]);
-    console.log(date.getTime());
     const reste = date.getTime() - Date.now();
     this.calculJours = Math.ceil(reste / (1000 * 60 * 60 * 24));
-    console.log(this.calculJours);
     if (this.calculJours === 0) {
       this.number2 = 2;
     } else {
       this.number2 = 1;
     }
-
-
   }
+
+  getThanks() {
+    this.isOK = true;
+  }
+
 }
+

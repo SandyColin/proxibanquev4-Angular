@@ -16,7 +16,16 @@ h1 {
     border: 5px solid green;
     background-color: black;
 }
-
+input, textarea{
+    
+    margin:auto;
+}
+textarea{
+    width:60%;
+}
+input {
+    width:30%;
+}
 h2{
     text-align:center; 
     color: black;

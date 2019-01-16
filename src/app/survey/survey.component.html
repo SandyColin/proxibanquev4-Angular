@@ -1,49 +1,59 @@
-<div class="body" >
-<h2>Sondage n°{{survey?.id}}</h2>
-<h2>Début du sondage : {{survey?.startingDate}}</h2>
-<h2>Fin prévisionnelle : {{survey?.provisionalDate}}</h2>
+<div class="body">
+  <h2>Sondage n°{{survey?.id}}</h2>
+  <h2>Début du sondage : {{survey?.startingDate}}</h2>
+  <h2>Fin prévisionnelle : {{survey?.provisionalDate}}</h2>
 
-<div [ngSwitch]="number">
+  <div [ngSwitch]="number">
 
-  <h1>Voudriez-vous adhérer à un service d'assurance auto Proxibanque ?</h1>
-  <div class="container" *ngSwitchCase="1">
-
-
-    <img class="list-icon" src="./assets/thumbup.png" (click)="onAddPositive()">
-
-    <div>
-      <img class="list-icon" src="./assets/thumbdown.png" (click)="onAddNegative()">
-    </div>
-  </div>
+    <h1>Voudriez-vous adhérer à un service d'assurance auto Proxibanque ?</h1>
+    <div class="container" *ngSwitchCase="1">
 
 
-  <div *ngSwitchCase="2" class="numeroclient">
-    <form (ngSubmit)="validatePos(clientForm)" #clientForm="ngForm">
-      <div class="form-group">
-        <label for="clientNumber">Numéro Client (8 chiffres) :</label>
-        <input [(ngModel)]="customer.clientNumber" required id="clientNumber" name="clientNumber" class="form-control" placeholder="Entrez votre numéro client">
+      <img class="list-icon" src="./assets/thumbup.png" (click)="onAddPositive()">
+
+      <div>
+        <img class="list-icon" src="./assets/thumbdown.png" (click)="onAddNegative()">
       </div>
-      <div [ngSwitch]="number2" class="remarque">
-      <div *ngSwitchCase="1">
-      <h4>Vous serez contacté(e) dans un délai de {{calculJours}} jours
-        par un de nos conseillers expert en assurance auto</h4> 
     </div>
-    <div *ngSwitchCase="2">
-        <h4>Vous serez contacté(e) dans quelques jours
-            par un de nos conseillers expert en assurance auto</h4> 
+
+
+    <div *ngSwitchCase="2" class="numeroclient">
+      <form (ngSubmit)="validatePos(clientForm)" #clientForm="ngForm">
+        <div class="form-group">
+          <label for="clientNumber">Numéro Client* (8 chiffres) :</label>
+          <input [(ngModel)]="customer.clientNumber" id="clientNumber" name="clientNumber" class="form-control"
+            placeholder="Entrez votre numéro client" required>
         </div>
+        <div [ngSwitch]="number2" class="remarque">
+          <div *ngSwitchCase="1">
+            <h4>Merci de votre participation. Vous serez contacté(e) dans un délai de {{calculJours}} jours
+              par un de nos conseillers expert en assurance auto</h4>
+          </div>
+          <div *ngSwitchCase="2">
+            <h4>Merci de votre participation. Vous serez contacté(e) dans quelques jours
+              par un de nos conseillers expert en assurance auto</h4>
+          </div>
+          <div *ngSwitchCase="3">
+              <h4>Votre numéro Client n'est pas reconnu. Veuillez retentez</h4>
+            </div>
+        </div>
+        <button (click)="getDays()" class="btn btn-primary" [disabled]="clientForm.invalid">Valider</button>
+      </form>
+    </div>
+    <ng-container *ngSwitchCase="3">
+      <form (ngSubmit)="validateNeg(commentForm)" #commentForm="ngForm">
+        <div class="form-group">
+          <label for="id">Commentaire :</label>
+          <textarea [(ngModel)]="opinion.comment" id="id" name="id" class="form-control" placeholder="Veuillez entrer un commentaire"></textarea>
+        </div>
+        <div *ngIf="isOK">
+          <div>
+            <h4>Merci de votre participation</h4>
+          </div>
+
+        </div>
+        <button (click)="getThanks()"class="btn btn-primary" >Valider</button>
+      </form>
+    </ng-container>
   </div>
-      <button (click)="getDays()" class="btn btn-primary">Valider</button>
-    </form>
-  </div>
-  <ng-container *ngSwitchCase="3">
-    <form (ngSubmit)="validateNeg(commentForm)" #commentForm="ngForm">
-      <div class="form-group">
-        <label for="id">Commentaire :</label>
-        <input [(ngModel)]="opinion.comment" required id="id" name="id" class="form-control">
-      </div>
-      <button class="btn btn-primary">Valider</button>
-    </form>
-  </ng-container>
-</div>
 </div>
