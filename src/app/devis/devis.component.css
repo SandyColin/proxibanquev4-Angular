@@ -6,25 +6,17 @@
   
 }
 h2, h1{
+   color: black;
+   font-weight:bold;
    
     text-align : center;
  }
+ 
  h1 {
    padding-top:350px;
  }
- #tel {
-   position:absolute;
-
-   bottom:90px;
-   
-}
-
-#mail {
-   position:absolute;
-   bottom:30px;
-   
-}
- button{
-   margin-left:1700px;
+ .container {
+   margin-top:275px;
  }
+
 

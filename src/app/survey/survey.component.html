@@ -17,17 +17,23 @@
   </div>
 
 
-  <div *ngSwitchCase="2">
+  <div *ngSwitchCase="2" class="numeroclient">
     <form (ngSubmit)="validatePos(clientForm)" #clientForm="ngForm">
       <div class="form-group">
         <label for="clientNumber">Numéro Client (8 chiffres) :</label>
-        <input [(ngModel)]="customer.clientNumber" required id="clientNumber" name="clientNumber" class="form-control">
+        <input [(ngModel)]="customer.clientNumber" required id="clientNumber" name="clientNumber" class="form-control" placeholder="Entrez votre numéro client">
       </div>
-      <div *ngIf="isOK">
+      <div [ngSwitch]="number2" class="remarque">
+      <div *ngSwitchCase="1">
       <h4>Vous serez contacté(e) dans un délai de {{calculJours}} jours
         par un de nos conseillers expert en assurance auto</h4> 
     </div>
-      <button (click)="onNumberValidated()" class="btn btn-primary">Valider</button>
+    <div *ngSwitchCase="2">
+        <h4>Vous serez contacté(e) dans quelques jours
+            par un de nos conseillers expert en assurance auto</h4> 
+        </div>
+  </div>
+      <button (click)="getDays()" class="btn btn-primary">Valider</button>
     </form>
   </div>
   <ng-container *ngSwitchCase="3">
