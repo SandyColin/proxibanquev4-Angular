@@ -6,7 +6,7 @@
   <div [ngSwitch]="number">
 
     <h1>Voudriez-vous adhérer à un service d'assurance auto Proxibanque ?</h1>
-    <div class="container" *ngSwitchCase="1">
+    <div class="container2" *ngSwitchCase="1">
 
 
       <img class="list-icon" src="./assets/thumbup.png" (click)="onAddPositive()">
@@ -40,7 +40,7 @@
         <button (click)="getDays()" class="btn btn-primary" [disabled]="clientForm.invalid">Valider</button>
       </form>
     </div>
-    <ng-container *ngSwitchCase="3">
+    <ng-container *ngSwitchCase="3" class="negatif">
       <form (ngSubmit)="validateNeg(commentForm)" #commentForm="ngForm">
         <div class="form-group" id="commentaire">
           <label for="id">Commentaire :</label>
@@ -48,11 +48,14 @@
         </div>
         <div *ngIf="isOK">
           <div>
-            <h4>Merci de votre participation</h4>
+            <h3>Merci de votre participation</h3>
           </div>
 
         </div>
-        <button (click)="getThanks()"class="btn btn-primary" >Valider</button>
+        <div class="container">
+        <div class="row">
+        <div class="col-lg-offset-4 col-lg-4">
+        <button (click)="getThanks()"class="btn btn-primary btn-block" >Valider</button></div></div></div>
       </form>
     </ng-container>
   </div>

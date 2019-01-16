@@ -90,6 +90,6 @@ export class SurveyComponent implements OnInit {
   getThanks() {
     this.isOK = true;
   }
-
+  
 }
 

@@ -1,4 +1,4 @@
-.container {
+.container2 {
     display:flex;
     justify-content: space-around;
     margin-top: 50px;
@@ -12,7 +12,7 @@ h1 {
     text-align:center;
     color: white;
     font-weight: bold;
-    border: 5px solid green;
+    border: 2px solid;
     background-color: black;
     width:65%;
 }
@@ -61,7 +61,14 @@ h3{
 button{
     margin-top:10px;
 }
-.commentaire{
+#commentaire{
+    margin-top:50px;
+    color: black;
+    font-weight: bold;
+    text-align:center;
+    font-size:x-large;
+}
+.negatif{
     color: black;
     font-weight: bold;
     text-align:center;
