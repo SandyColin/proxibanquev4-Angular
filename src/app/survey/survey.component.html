@@ -1,7 +1,7 @@
 <div class="body">
-  <h2>Sondage n°{{survey?.id}}</h2>
-  <h2>Début du sondage : {{survey?.startingDate}}</h2>
-  <h2>Fin prévisionnelle : {{survey?.provisionalDate}}</h2>
+  <h2>Sondage n°{{survey.id}}</h2>
+  <h2>Début du sondage : {{survey.startingDate[2]}}.{{survey.startingDate[1]}}.{{survey.startingDate[0]}}</h2>
+  <h2>Fin prévisionnelle : {{survey.provisionalDate[2]}}.{{survey.provisionalDate[1]}}.{{survey.provisionalDate[0]}}</h2>
 
   <div [ngSwitch]="number">
 
@@ -19,22 +19,22 @@
 
     <div *ngSwitchCase="2" class="numeroclient">
       <form (ngSubmit)="validatePos(clientForm)" #clientForm="ngForm">
-        <div class="form-group">
+        <div class="form-group" id="numeroClient">
           <label for="clientNumber">Numéro Client* (8 chiffres) :</label>
           <input [(ngModel)]="customer.clientNumber" id="clientNumber" name="clientNumber" class="form-control"
             placeholder="Entrez votre numéro client" required>
         </div>
         <div [ngSwitch]="number2" class="remarque">
           <div *ngSwitchCase="1">
-            <h4>Merci de votre participation. Vous serez contacté(e) dans un délai de {{calculJours}} jours
-              par un de nos conseillers expert en assurance auto</h4>
+            <h3>Merci de votre participation. Vous serez contacté(e) dans un délai de {{calculJours}} jours
+              par un de nos conseillers expert en assurance auto</h3>
           </div>
           <div *ngSwitchCase="2">
-            <h4>Merci de votre participation. Vous serez contacté(e) dans quelques jours
-              par un de nos conseillers expert en assurance auto</h4>
+            <h3>Merci de votre participation. Vous serez contacté(e) dans quelques jours
+              par un de nos conseillers expert en assurance auto</h3>
           </div>
           <div *ngSwitchCase="3">
-              <h4>Votre numéro Client n'est pas reconnu. Veuillez retentez</h4>
+              <h3>Votre numéro Client n'est pas reconnu. Veuillez retentez</h3>
             </div>
         </div>
         <button (click)="getDays()" class="btn btn-primary" [disabled]="clientForm.invalid">Valider</button>
@@ -42,7 +42,7 @@
     </div>
     <ng-container *ngSwitchCase="3">
       <form (ngSubmit)="validateNeg(commentForm)" #commentForm="ngForm">
-        <div class="form-group">
+        <div class="form-group" id="commentaire">
           <label for="id">Commentaire :</label>
           <textarea [(ngModel)]="opinion.comment" id="id" name="id" class="form-control" placeholder="Veuillez entrer un commentaire"></textarea>
         </div>
